@@ -1,0 +1,134 @@
+.page-footer {
+  background: var(--footer-gradient-background);
+  padding-top: rem(40px);
+}
+
+.page-footer__wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  min-height: rem(310px);
+  box-sizing: content-box;
+
+  background-image: url("./../../assets/footer-puppy-desktop-background.png");
+  background-repeat: no-repeat;
+  background-size: 300px 310px;
+  background-position: right bottom;
+}
+
+.page-footer__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: rem(233px);
+  margin-top: rem(17px);
+
+  &--contacts {
+    max-width: rem(279px);
+  }
+
+  &--locations {
+    max-width: rem(301px);
+    margin-left: rem(160px);
+  }
+}
+
+.page-footer__link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: rem(32px);
+  width: 100%;
+}
+
+.page-footer__link-icon {
+  flex-shrink: 0;
+  margin-right: rem(20px);
+
+  &--email {
+    width: rem(40px);
+    height: rem(26px);
+  }
+
+  &--phone {
+    width: rem(40px);
+    height: rem(32px);
+  }
+}
+
+.page-footer__image {
+  flex-shrink: 4;
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: $width-screen-desktop - 1px) {
+  // помним, что в блоке .page-footer
+  // верхний паддинг задаётся у
+  // самого класса .page-footer
+  // чтобы не плодить лишних обёрток
+  .page-footer {
+    padding-top: rem(30px);
+  }
+
+  .page-footer__wrapper {
+    min-height: rem(609px);
+    background-position: center bottom;
+  }
+
+  .page-footer__container {
+    margin-top: rem(1px);
+
+    &--contacts {
+      margin-left: rem(35px);
+    }
+
+    &--locations {
+      margin-left: rem(59px);
+    }
+  }
+}
+
+@media (max-width: $width-screen-tablet - 1px) {
+  .page-footer__wrapper {
+    min-height: rem(779px);
+    flex-direction: column;
+    align-items: center;
+
+    background-image: url("./../../assets/footer-puppy-mobile-background.png");
+    background-size: 260px auto;
+  }
+
+  .page-footer__container {
+    align-items: center;
+    margin: 0;
+
+    &--contacts {
+      min-height: rem(208px);
+      max-width: rem(279px);
+      margin-bottom: rem(40px);
+    }
+
+    &--locations {
+      min-height: rem(222px);
+      max-width: rem(300px);
+    }
+  }
+
+  .page-footer__link-icon {
+    &--email {
+      margin-left: rem(9px);
+    }
+
+    &--phone {
+      margin-left: rem(15px);
+    }
+  }
+
+  .page-footer__heading {
+    width: rem(270px);
+    text-align: center;
+    margin-left: rem(2px);
+  }
+}

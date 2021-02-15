@@ -1,0 +1,44 @@
+.text {
+  font-family: "Arial", sans-serif;
+  line-height: rem(24px);
+  color: var(--color-dark-xl);
+
+  &--motto {
+    font-size: 0.86667rem;
+    line-height: rem(14.95px);
+    letter-spacing: 0.1em;
+    color: var(--color-light-xl);
+  }
+
+  &--white {
+    color: var(--color-dark-s);
+  }
+
+  &--black {
+    color: var(--color-dark-3xl);
+  }
+
+  &--note {
+    font-size: rem(12px);
+    line-height: rem(18px);
+    font-style: oblique;
+    color: var(--color-dark-m);
+  }
+
+  &--modal {
+    font-family: "Georgia", serif;
+    font-size: rem(15px);
+    line-height: rem(17.5px);
+    letter-spacing: 0.06em;
+    color: var(--color-black);
+  }
+}
+
+@media (max-width: $width-screen-desktop - 1px) {
+  .text {
+    &--modal {
+      font-size: rem(13px);
+      line-height: rem(14.3px);
+    }
+  }
+}

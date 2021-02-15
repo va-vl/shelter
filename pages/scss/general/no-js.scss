@@ -1,0 +1,43 @@
+@media (max-width: $width-screen-tablet - 1px) {
+  .no-js {
+    .link__header {
+      font-size: rem(16px);
+      line-height: rem(32px);
+    }
+
+    .page-header__nav-button {
+      display: none;
+    }
+
+    .page-header__wrapper {
+      display: block;
+    }
+
+    .page-header__nav-list {
+      display: block;
+      margin-top: rem(10px);
+      margin-left: rem(5px);
+    }
+
+    .page-header__nav-item {
+      display: block;
+    }
+
+    .page-header__nav-item:not(:last-child) {
+      padding-right: 0;
+    }
+
+    .jumbotron__wrapper {
+      padding-top: rem(280px);
+    }
+
+    .page-header--pets {
+      position: absolute;
+      min-height: rem(260px);
+    }
+
+    .select__wrapper {
+      padding-top: rem(280px);
+    }
+  }
+}

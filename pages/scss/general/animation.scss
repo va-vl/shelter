@@ -1,0 +1,27 @@
+@keyframes fade {
+  from {
+    background-color: transparent;
+  }
+  to {
+    background-color: var(--color-dark-3xl-transparent);
+  }
+}
+
+@keyframes turn {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-90deg);
+  }
+}
+
+@keyframes slideBurgerMenu {
+  from {
+    display: none;
+    right: rem(-320px);
+  }
+  to {
+    right: 0;
+  }
+}

@@ -1,0 +1,33 @@
+.card {
+  padding-bottom: 2rem;
+  border-radius: 1rem 1rem 0.6rem 0.6rem;
+  background-color: var(--color-light-s);
+  transition: box-shadow 100ms ease-in;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover,
+  &:focus-within {
+    background-color: var(--color-light-xl);
+    box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+  }
+}
+
+.card__image {
+  border-radius: 0.6rem 0.6rem 0 0;
+}
+
+.card__heading {
+  margin: 1.75rem 0 2.06667rem 0.06667rem;
+  text-align: center;
+}
+
+.card__button {
+  position: relative;
+  width: rem(186px);
+  min-height: rem(52px);
+  margin: 0 auto;
+  text-align: center;
+}

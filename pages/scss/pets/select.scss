@@ -1,0 +1,23 @@
+.select {
+  padding: rem(201px) 0 rem(100px);
+  background-color: var(--color-light-l);
+}
+
+.select__heading {
+  margin-left: rem(2px);
+  text-align: center;
+}
+
+@media (max-width: $width-screen-desktop - 1px) {
+  .select {
+    padding-top: rem(201px);
+    padding-bottom: rem(76px);
+  }
+}
+
+@media (max-width: $width-screen-tablet - 1px) {
+  .select {
+    padding-top: rem(162px);
+    padding-bottom: rem(42px);
+  }
+}

@@ -1,0 +1,68 @@
+.slideshow {
+  padding-top: rem(35px);
+}
+
+.slideshow__wrapper {
+  width: rem(1200px);
+  height: rem(900px);
+  padding: rem(59px - 35px) calc((100% - 1200px) / 2) rem(25px);
+  overflow-y: hidden;
+  box-sizing: content-box;
+}
+
+.slideshow__list {
+  position: relative;
+  display: flex;
+  bottom: 0;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  list-style: none;
+}
+
+.slideshow__card {
+  width: rem(270px);
+  margin-bottom: rem(30px);
+}
+
+.slideshow__pagination {
+  margin-top: rem(35px);
+  width: 100%;
+}
+
+@media (max-width: $width-screen-desktop - 1px) {
+  .slideshow {
+    padding-top: rem(4px);
+  }
+
+  .slideshow__wrapper {
+    width: rem(580px);
+    height: rem(1365px);
+    padding: rem(25px) calc((100% - 580px) / 2) rem(25px);
+  }
+
+  .slideshow__pagination {
+    margin-top: rem(15px);
+  }
+}
+
+@media (max-width: $width-screen-tablet - 1px) {
+  .slideshow {
+    padding-top: rem(17px);
+  }
+
+  .slideshow__wrapper {
+    width: rem(270px);
+    height: rem(1365px);
+    padding: rem(42px - 17px) calc((100% - 270px) / 2) rem(25px);
+  }
+
+  .slideshow__list {
+    justify-content: center;
+  }
+
+  .slideshow__pagination {
+    margin-top: rem(17px);
+  }
+}

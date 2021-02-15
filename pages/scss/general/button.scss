@@ -1,0 +1,57 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  border-radius: rem(100px);
+  background-color: var(--color-primary);
+
+  font-family: "Georgia", serif;
+  font-size: 1.13333rem;
+  line-height: 1.46667rem;
+  letter-spacing: 0.07rem;
+  text-decoration: none;
+  color: var(--color-dark-3xl);
+  transition: background-color 100ms ease, border-color 100ms ease-in;
+
+  &:focus,
+  &:hover {
+    outline: none;
+    background-color: var(--color-primary-light);
+    cursor: pointer;
+  }
+
+  &--hollow {
+    background-color: transparent;
+    border: 2px solid var(--color-primary);
+
+    &:focus,
+    &:hover {
+      border-color: var(--color-primary-light);
+    }
+
+    &:disabled {
+      cursor: auto;
+      background-color: transparent;
+      border-color: var(--color-dark-s);
+      color: var(--color-dark-s);
+
+      path {
+        fill: var(--color-dark-s);
+      }
+    }
+  }
+
+  &--pagination {
+    font-size: rem(23px);
+    line-height: rem(23px);
+    font-weight: 400;
+    user-select: none;
+  }
+
+  &--hover {
+    border-color: var(--color-primary-light);
+    background-color: var(--color-primary-light);
+  }
+}

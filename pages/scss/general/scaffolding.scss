@@ -1,0 +1,62 @@
+:root {
+  font-size: 15px;
+  font-weight: 400;
+  scroll-behavior: smooth;
+}
+
+*,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  min-width: 300px;
+}
+
+picture {
+  line-height: 0;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+.block-span {
+  display: block;
+}
+
+.content-wrapper {
+  width: rem($width-content-desktop);
+  margin: 0 auto;
+}
+
+@media (max-width: $width-screen-desktop - 1px) {
+  .content-wrapper {
+    width: rem($width-content-tablet);
+  }
+}
+
+@media (max-width: $width-screen-tablet - 1px) {
+  .content-wrapper {
+    width: rem($width-content-mobile);
+  }
+}

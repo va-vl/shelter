@@ -1,0 +1,32 @@
+.pets {
+  padding: rem(80px) 0 rem(100px);
+  background-color: var(--color-light-l);
+}
+
+.pets__heading {
+  margin-top: rem(1px);
+  margin-left: rem(2px);
+  text-align: center;
+}
+
+.pets__button {
+  width: rem(261px);
+  min-height: rem(52px);
+  margin: 0 auto;
+}
+
+@media (max-width: $width-screen-desktop - 1px) {
+  .pets__button {
+    width: rem(260px);
+  }
+}
+
+@media (max-width: $width-screen-tablet - 1px) {
+  .pets {
+    padding: rem(41px) 0 rem(42px);
+  }
+
+  .pets__wrapper {
+    width: 100%;
+  }
+}

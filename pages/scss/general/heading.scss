@@ -1,0 +1,96 @@
+.heading {
+  font-family: "Georgia", serif;
+  font-weight: 400;
+  color: var(--color-dark-l);
+
+  &--h1 {
+    font-size: rem(32px);
+    line-height: rem(35.2px);
+    letter-spacing: 0.06em;
+    color: var(--color-primary);
+  }
+
+  &--h2 {
+    font-size: rem(44px);
+    line-height: rem(57.2px);
+  }
+
+  &--h3,
+  &--footer,
+  &--h3-modal {
+    font-size: rem(35px);
+    line-height: rem(45.5px);
+    letter-spacing: 0.06em;
+  }
+
+  &--h4,
+  &--h4-modal {
+    font-size: rem(20px);
+    line-height: rem(23px);
+    letter-spacing: 0.06em;
+  }
+
+  &--need {
+    letter-spacing: 0.0575em;
+  }
+
+  &--h5 {
+    font-size: rem(15px);
+    line-height: rem(16.5px);
+    letter-spacing: 0.06em;
+  }
+
+  &--card {
+    font-size: rem(20px);
+    line-height: rem(22.72px);
+    letter-spacing: 0.06em;
+  }
+
+  &--white {
+    color: var(--color-light-xl);
+  }
+
+  &--pets {
+    color: var(--color-dark-xl);
+  }
+
+  &--modal {
+    color: var(--color-black);
+  }
+
+  &--bold {
+    font-weight: 700;
+    letter-spacing: 0.13em;
+  }
+}
+
+@media (max-width: $width-screen-tablet - 1px) {
+  .heading {
+    &--h2 {
+      font-size: rem(25px);
+      line-height: rem(32.5px);
+      letter-spacing: 0.06em;
+    }
+
+    &--h3 {
+      font-size: rem(25px);
+      line-height: rem(32.5px);
+    }
+
+    &--h4 {
+      font-size: rem(15px);
+      line-height: rem(16.5px);
+    }
+
+    &--h5 {
+      line-height: rem(24px);
+      letter-spacing: normal;
+    }
+
+    &--footer {
+      font-size: rem(25px);
+      line-height: rem(32.5px);
+      letter-spacing: 0.1rem;
+    }
+  }
+}

@@ -1,0 +1,166 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-dark-3xl-transparent);
+  z-index: 4;
+
+  opacity: 0;
+  transition: opacity 300ms ease;
+
+  &--on {
+    opacity: 1;
+  }
+}
+
+.modal__item {
+  position: relative;
+  width: rem(900px);
+  // margin-bottom: rem(43px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: rem(9px);
+  background-color: var(--color-light-s);
+}
+
+.modal__button {
+  position: absolute;
+  right: rem(-42px);
+  top: rem(-52px);
+  width: rem(52px);
+  height: rem(52px);
+}
+
+.modal__image {
+  width: rem(500px);
+  border-radius: rem(9px) 0 0 rem(9px);
+}
+
+.modal__text-wrapper {
+  width: rem(350px);
+  margin: 51px 0 0 30px;
+}
+
+.modal__subheading {
+  margin-top: rem(9px);
+}
+
+.modal__text {
+  margin-top: rem(42px);
+}
+
+.modal__list {
+  width: 100%;
+  margin: rem(40px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.modal__list-item {
+  position: relative;
+  padding-left: rem(15px);
+  margin: 12px 0;
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    top: rem(6px);
+    left: 0;
+    width: rem(4px);
+    height: rem(4px);
+    background-color: var(--color-primary);
+    border-radius: 50%;
+  }
+}
+
+@media (max-width: $width-screen-desktop - 1px) {
+  .modal__item {
+    width: rem(630px);
+    // margin-top: rem(93px);
+    margin-bottom: 0;
+  }
+
+  .modal__button {
+    right: rem(-43px);
+  }
+
+  .modal__image {
+    width: rem(350px);
+  }
+
+  .modal__text-wrapper {
+    width: rem(261px);
+    margin: 10px 0 0 11px;
+  }
+
+  .modal__subheading {
+    margin-top: rem(10px);
+  }
+
+  .modal__text {
+    margin-top: rem(22px);
+  }
+
+  .modal__list {
+    margin-top: rem(20px);
+  }
+
+  .modal__list-item {
+    margin: rem(7px) 0;
+  }
+}
+
+@media (max-width: $width-screen-tablet - 1px) {
+  .modal__item {
+    width: rem(240px);
+    // margin-top: rem(176px);
+  }
+
+  .modal__button {
+    right: rem(-30px);
+  }
+
+  .modal__image {
+    display: none;
+  }
+
+  .modal__text-wrapper {
+    margin: 10px;
+  }
+
+  .modal__heading {
+    text-align: center;
+    margin-left: rem(3px);
+  }
+
+  .modal__subheading {
+    text-align: center;
+  }
+
+  .modal__text {
+    text-align: justify;
+  }
+
+  .modal__list {
+    margin-top: rem(19px);
+    margin-bottom: 0;
+  }
+
+  .modal__list-item {
+    margin: 0;
+    line-height: rem(23.5px);
+    letter-spacing: 0.04em;
+
+    &::before {
+      top: rem(10px);
+      left: rem(1px);
+    }
+  }
+}
