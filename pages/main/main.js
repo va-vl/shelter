@@ -1,66 +1,50 @@
-const slideshowWrapper = document.querySelector(".slideshow__wrapper");
-const slideshowButtons = document.querySelectorAll(".slideshow__button");
-let currentSlide = document.querySelector(".slideshow__list");
+const HOST = document.body.querySelector('.slideshow');
+const WRAPPER = HOST.querySelector('.slideshow__wrapper');
+const BUTTONS = [...HOST.querySelectorAll('.slideshow__button')];
+let currentSlide = HOST.querySelector('.slideshow__list');
 
-for (let button of slideshowButtons) {
-  button.addEventListener("click", async (event) => {
-    await move(button);
-    button.blur();
-  });
-}
+HOST.addEventListener('click', (event) => {
+  const t = event.target.closest('.slideshow__button');
 
-async function move(elem) {
-  if (isMoving) return;
+  if (BUTTONS.includes(t) && !isMoving) {
+    t.blur();
+    move(t);
+  }
+});
+
+const move = async (button) => {
   isMoving = true;
 
-  const isNext = elem.classList.contains("slideshow__button--next");
-  const direction = isNext ? "afterbegin" : "beforeend";
-  const width = currentSlide.offsetWidth;
+  const isNext = button.classList.contains('slideshow__button--next');
+  const direction = isNext ? 'afterbegin' : 'beforeend';
+  const newSlide = await createNewSlide();
 
-  const newSlide = await createNewSlide("./../../assets/pets.json");
-  newSlide.style = `left: ${isNext ? -width : width}px`;
-  slideshowWrapper.insertAdjacentElement(direction, newSlide);
+  newSlide.style = `left: ${isNext ? -100 : 100}%`;
+  WRAPPER.insertAdjacentElement(direction, newSlide);
 
-  await new Promise((resolve) => setTimeout(resolve, 50));
-
-  if (isNext) {
-    await Promise.all([
-      playTransitionOnce(currentSlide, `left: ${width}px`),
+  await new Promise((resolve) => setTimeout(resolve, 50))
+    .then(() => Promise.all([
+      playTransitionOnce(currentSlide, `left: ${isNext ? 100 : -100}%`),
       playTransitionOnce(newSlide, `left: 0px`),
-    ]);
-  } else {
-    await Promise.all([
-      playTransitionOnce(currentSlide, `left: ${-width}px`),
-      playTransitionOnce(newSlide, `left: 0px`),
-    ]);
-  }
+    ]));
 
   currentSlide.remove();
   currentSlide = newSlide;
   cleanStyle(currentSlide);
+
   isMoving = false;
-}
+};
 
-async function createNewSlide(url) {
-  let currentTags = [...currentSlide.children].map(
-    (card) => card.dataset.name + "-" + card.dataset.type
-  );
-  let allTags = await fetch(url)
+const createNewSlide = async () => {
+  const currentTags = [...currentSlide.children].map((card) => getTag(card.dataset));
+  const newConfigs = await fetch(JSON_URL)
     .then((res) => res.json())
-    .then((res) => {
-      return res.map((card) => card.name + "-" + card.type);
-    });
+    .then((res) => res.map(getTag).filter((str) => !currentTags.includes(str)))
+    .then((res) => shuffle(res).slice(0, 3).map(parseTag));
 
-  let newTags = shuffle(
-    allTags.filter((tag) => !currentTags.includes(tag))
-  ).slice(0, 3);
+  const ul = document.createElement('ul');
+  ul.classList.add('slideshow__list');
+  ul.innerHTML = newConfigs.reduce((acc, i) => `${acc}${createCardHTML(i)}`, '');
 
-  let newItemsStr = [...newTags].reduce((acc, tag) => {
-    return acc + createCardHTML(...tag.split("-"));
-  }, "");
-
-  let newList = document.createElement("ul");
-  newList.classList.add("slideshow__list");
-  newList.innerHTML = newItemsStr;
-  return newList;
+  return ul;
 }

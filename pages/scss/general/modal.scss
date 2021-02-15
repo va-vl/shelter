@@ -7,14 +7,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-dark-3xl-transparent);
   z-index: 4;
 
-  opacity: 0;
-  transition: opacity 300ms ease;
-
-  &--on {
+  &--on .modal__background {
     opacity: 1;
+    cursor: pointer;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.modal__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--color-dark-3xl-transparent);
+
+  &:hover+.modal__item .modal__button {
+    background-color: var(--color-primary-light);
+    border-color: var(--color-primary-light);
   }
 }
 
@@ -26,6 +41,7 @@
   align-items: flex-start;
   border-radius: rem(9px);
   background-color: var(--color-light-s);
+  z-index: 2;
 }
 
 .modal__button {

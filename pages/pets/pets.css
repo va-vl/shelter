@@ -273,12 +273,23 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-dark-3xl-transparent);
-  z-index: 4;
-  opacity: 0;
-  transition: opacity 300ms ease; }
-  .modal--on {
-    opacity: 1; }
+  z-index: 4; }
+  .modal--on .modal__background {
+    opacity: 1;
+    cursor: pointer; }
+  .modal:hover {
+    cursor: pointer; }
+
+.modal__background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--color-dark-3xl-transparent); }
+  .modal__background:hover + .modal__item .modal__button {
+    background-color: var(--color-primary-light);
+    border-color: var(--color-primary-light); }
 
 .modal__item {
   position: relative;
@@ -287,7 +298,8 @@ img {
   justify-content: flex-start;
   align-items: flex-start;
   border-radius: 0.6rem;
-  background-color: var(--color-light-s); }
+  background-color: var(--color-light-s);
+  z-index: 2; }
 
 .modal__button {
   position: absolute;
