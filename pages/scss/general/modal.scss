@@ -21,7 +21,6 @@
 .modal__item {
   position: relative;
   width: rem(900px);
-  // margin-bottom: rem(43px);
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -83,7 +82,6 @@
 @media (max-width: $width-screen-desktop - 1px) {
   .modal__item {
     width: rem(630px);
-    // margin-top: rem(93px);
     margin-bottom: 0;
   }
 
@@ -120,7 +118,6 @@
 @media (max-width: $width-screen-tablet - 1px) {
   .modal__item {
     width: rem(240px);
-    // margin-top: rem(176px);
   }
 
   .modal__button {

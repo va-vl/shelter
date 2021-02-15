@@ -1,9 +1,5 @@
-const scrollBarWidth = getScrollbarWidth();
+const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
 let lastWidth = window.innerWidth;
-
-function getScrollbarWidth() {
-  return window.innerWidth - document.documentElement.clientWidth;
-}
 
 function playAnimationOnce(elem, animStr) {
   return new Promise((resolve) => {
