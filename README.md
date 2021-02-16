@@ -1,7 +1,10 @@
 # Shelter
 
-Demo link:
+Demo link: https://va-z.github.io/shelter/pages/main/main.html
 
-An update version of the task from RSSchool. 
-
-Who needs people when we can have pets?
+A __slightly__ updated version of the task from RSSchool. Features: 
+- Multi-page website;
+- Animated slider and burger menu;
+- Faux pagination with a custom randomization algorithm;
+- Adaptive layout;
+- Webp graphics;
