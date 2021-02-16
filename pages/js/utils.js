@@ -3,7 +3,7 @@ const shuffle = (arr) => {
 
   for (let i = lastIndex; i > 0; i -= 1) {
     const j = (Math.random() * (i + 1)) | 0;
-    [ arr[i], arr[j] ] = [ arr[j], arr[i] ];
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 
   return arr;
@@ -14,11 +14,11 @@ const getProportion = (a1, b1, b2) => Math.round((a1 * b2) / b1);
 const getTag = (obj) => `${obj.name}-${obj.type}`;
 
 const parseTag = (tag) => {
-  const [name, type] = tag.split("-");
-  return {name, type};
-}
+  const [name, type] = tag.split('-');
+  return { name, type };
+};
 
-const createCardHTML = ({name, type}) => `
+const createCardHTML = ({ name, type }) => `
   <li class="slideshow__card card" data-name="${name}" data-type="${type}">
     <picture>
       <source srcset="./../../assets/pets-${name.toLowerCase()}.webp" type="image/webp">
@@ -50,7 +50,7 @@ const createModalHTML = ({
         </svg>
       </button>
       <picture class="modal__picture">
-        <source srcset="${img.replace(".jpg", ".webp")}" type="image/webp">
+        <source srcset="${img.replace('.jpg', '.webp')}" type="image/webp">
         <img class="modal__image" src="${img}" alt="${name} the ${type.toLowerCase()}" width="500">
       </picture>
       <div class="modal__text-wrapper">
@@ -62,37 +62,42 @@ const createModalHTML = ({
             <span class="heading--bold">Age:</span> ${age}
           </li>
           <li class="modal__list-item heading heading--h5 heading--modal">
-            <span class="heading--bold">Inoculations:</span> ${inoculations.join(", ")}
+            <span class="heading--bold">Inoculations:</span> ${inoculations.join(', ')}
           </li>
           <li class="modal__list-item heading heading--h5 heading--modal">
-            <span class="heading--bold">Diseases:</span> ${diseases.join(", ")}
+            <span class="heading--bold">Diseases:</span> ${diseases.join(', ')}
           </li>
           <li class="modal__list-item heading heading--h5 heading--modal">
-            <span class="heading--bold">Parasites:</span> ${parasites.join(", ")}
+            <span class="heading--bold">Parasites:</span> ${parasites.join(', ')}
           </li>
         </ul>
       </div>
     </article>
   </div>`;
 
-const playAnimationOnce = (elem, animStr) => new Promise((resolve) => {
-  const callback = () => {
-    elem.removeEventListener("animationend", callback);
-    resolve();
-  };
+const playAnimationOnce = (elem, animStr) =>
+  new Promise((resolve) => {
+    const callback = () => {
+      elem.removeEventListener('animationend', callback);
+      resolve();
+    };
 
-  elem.addEventListener("animationend", callback);
-  elem.style.animation = animStr;
-});
+    elem.addEventListener('animationend', callback);
+    elem.style.animation = animStr;
+  });
 
-const playTransitionOnce = (elem, style) => new Promise((resolve) => {
-  const callback = () => {
-    elem.removeEventListener("transitionend", callback);
-    resolve();
-  };
+const playTransitionOnce = (elem, style) =>
+  new Promise((resolve) => {
+    const callback = () => {
+      elem.removeEventListener('transitionend', callback);
+      resolve();
+    };
 
-  elem.addEventListener("transitionend", callback);
-  elem.style = style;
-});
+    elem.addEventListener('transitionend', callback);
+    elem.style = style;
+  });
 
-const cleanStyle = (...elements) => elements.forEach((elem) => { elem.style = ''; });
+const cleanStyle = (...elements) =>
+  elements.forEach((elem) => {
+    elem.style = '';
+  });

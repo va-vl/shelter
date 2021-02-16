@@ -22,11 +22,12 @@ const move = async (button) => {
   newSlide.style = `left: ${isNext ? -100 : 100}%`;
   WRAPPER.insertAdjacentElement(direction, newSlide);
 
-  await new Promise((resolve) => setTimeout(resolve, 50))
-    .then(() => Promise.all([
+  await new Promise((resolve) => setTimeout(resolve, 50)).then(() =>
+    Promise.all([
       playTransitionOnce(currentSlide, `left: ${isNext ? 100 : -100}%`),
       playTransitionOnce(newSlide, `left: 0px`),
-    ]));
+    ]),
+  );
 
   currentSlide.remove();
   currentSlide = newSlide;
@@ -47,4 +48,4 @@ const createNewSlide = async () => {
   ul.innerHTML = newConfigs.reduce((acc, i) => `${acc}${createCardHTML(i)}`, '');
 
   return ul;
-}
+};

@@ -77,15 +77,13 @@
     width: 100%;
     height: rem(2px);
     background-color: var(--color-primary);
-    box-shadow: 0 rem(-10px) 0 0 var(--color-primary),
-      0 rem(10px) 0 0 var(--color-primary);
+    box-shadow: 0 rem(-10px) 0 0 var(--color-primary), 0 rem(10px) 0 0 var(--color-primary);
   }
 
   &--pets {
     &::before {
       background-color: var(--color-black);
-      box-shadow: 0 rem(-10px) 0 0 var(--color-black),
-        0 rem(10px) 0 0 var(--color-black);
+      box-shadow: 0 rem(-10px) 0 0 var(--color-black), 0 rem(10px) 0 0 var(--color-black);
     }
   }
 }
@@ -166,8 +164,7 @@
 
       &::before {
         background-color: var(--color-primary);
-        box-shadow: 0 rem(-10px) 0 0 var(--color-primary),
-          0 rem(10px) 0 0 var(--color-primary);
+        box-shadow: 0 rem(-10px) 0 0 var(--color-primary), 0 rem(10px) 0 0 var(--color-primary);
       }
     }
 
