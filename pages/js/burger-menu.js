@@ -42,8 +42,6 @@ async function closeMenu() {
   }
 }
 
-menuButton.addEventListener("click", openMenu);
-
 document.addEventListener("click", (event) => {
   if (event.target === headerMenuWrapper || event.target === menuButton) {
     closeMenu();
@@ -55,6 +53,9 @@ document.addEventListener("keydown", (event) => {
     closeMenu()
   };
 });
+
+menuButton.addEventListener("click", openMenu);
+
 
 scrollLink.addEventListener("click", () => {
   window.scrollTo(0, 0);

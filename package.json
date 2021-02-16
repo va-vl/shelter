@@ -1,6 +1,6 @@
 {
   "name": "shelter",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "A task for RSSchool",
   "main": "./pages/main/main.html",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rolling-scopes-school/va-z-JS2020Q3.git"
+    "url": "git+https://github.com/va-z/shelter.git"
   },
   "author": "va-z",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rolling-scopes-school/va-z-JS2020Q3/issues"
+    "url": "https://github.com/va-z/shelter/issues"
   },
-  "homepage": "https://github.com/rolling-scopes-school/va-z-JS2020Q3/shelter#readme",
+  "homepage": "git+https://github.com/va-z/shelter#readme",
   "devDependencies": {
     "babel": "^6.23.0",
     "browser-sync": "^2.26.12",
