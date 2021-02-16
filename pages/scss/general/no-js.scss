@@ -13,14 +13,19 @@
       display: block;
     }
 
+    .page-header__nav {
+      display: block;
+    }
+
     .page-header__nav-list {
       display: block;
-      margin-top: rem(10px);
+      margin-top: rem(25px);
       margin-left: rem(5px);
     }
 
     .page-header__nav-item {
       display: block;
+      margin: rem(15px) 0;
     }
 
     .page-header__nav-item:not(:last-child) {
@@ -28,16 +33,29 @@
     }
 
     .jumbotron__wrapper {
-      padding-top: rem(280px);
+      padding-top: rem(175px);
     }
 
     .page-header--pets {
       position: absolute;
       min-height: rem(260px);
+      padding-bottom: 0px;
+    }
+
+    .pets__slideshow {
+      min-height: auto;
+    }
+
+    .slideshow__button {
+      display: none;
     }
 
     .select__wrapper {
-      padding-top: rem(280px);
+      padding-top: rem(180px);
+    }
+
+    .pagination {
+      display: none;
     }
   }
 }
