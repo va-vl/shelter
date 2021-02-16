@@ -2,6 +2,7 @@
   from {
     background-color: transparent;
   }
+
   to {
     background-color: var(--color-dark-3xl-transparent);
   }
@@ -11,6 +12,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(-90deg);
   }
@@ -21,7 +23,18 @@
     display: none;
     right: rem(-320px);
   }
+
   to {
     right: 0;
+  }
+}
+
+@keyframes dissolve {
+  from {
+    transform: 1;
+  }
+
+  to {
+    opacity: 0;
   }
 }

@@ -39,7 +39,6 @@ while (passCounter < PASS_TARGET) {
   }
 
   tempTags.forEach((tag) => { resultTags.push(tag); });
-
   tempTags.clear();
   forbiddenTags.length = 0;
   passCounter += 1;

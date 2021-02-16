@@ -1,6 +1,3 @@
-/**
- * @description Fisher-Yates shuffle
- */
 const shuffle = (arr) => {
   const lastIndex = arr.length - 1;
 
@@ -12,12 +9,7 @@ const shuffle = (arr) => {
   return arr;
 };
 
-/**
- * @description Proportion is (a1 / a2) = (b1 / b2), returns a2 = (a1 * b2) / b1;
- */
 const getProportion = (a1, b1, b2) => Math.round((a1 * b2) / b1);
-
-const cleanStyle = (...elements) => elements.forEach((elem) => { elem.style = ''; });
 
 const getTag = (obj) => `${obj.name}-${obj.type}`;
 
@@ -49,10 +41,10 @@ const createModalHTML = ({
   diseases,
   parasites,
 }) => `
-  <div class="modal" id="modal">
+  <div class="modal modal--on" id="modal">
     <div class="modal__background" onclick="closeModal()"></div>
     <article class="modal__item">
-      <button class="modal__button button button--hollow">
+      <button class="modal__button button button--hollow" onclick="closeModal()">
         <svg class="modal__button-icon" width="12" height="12">
           <use href="./../../assets/icons/misc.svg#cancel"></use>
         </svg>
@@ -86,7 +78,6 @@ const createModalHTML = ({
 const playAnimationOnce = (elem, animStr) => new Promise((resolve) => {
   const callback = () => {
     elem.removeEventListener("animationend", callback);
-    elem.style.animation = null;
     resolve();
   };
 
@@ -97,10 +88,11 @@ const playAnimationOnce = (elem, animStr) => new Promise((resolve) => {
 const playTransitionOnce = (elem, style) => new Promise((resolve) => {
   const callback = () => {
     elem.removeEventListener("transitionend", callback);
-    elem.style = null;
     resolve();
   };
 
   elem.addEventListener("transitionend", callback);
   elem.style = style;
 });
+
+const cleanStyle = (...elements) => elements.forEach((elem) => { elem.style = ''; });

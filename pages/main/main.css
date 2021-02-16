@@ -432,6 +432,12 @@ img {
   to {
     right: 0; } }
 
+@keyframes dissolve {
+  from {
+    transform: 1; }
+  to {
+    opacity: 0; } }
+
 .page-header {
   position: absolute;
   top: 0;

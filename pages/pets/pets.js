@@ -10,42 +10,17 @@ const MAX_PAGES_MOBILE = 16;
 const pagElem = document.body.querySelector(".pagination");
 const pageCounterElem = pagElem.querySelector(".pagination__counter");
 const pagButtons = pagElem.querySelectorAll(".pagination__button");
-const [ fastBackward, backward, forward, fastForward ] = pagButtons;
 
 let maxPages = MAX_PAGES_DESKTOP;
 let moveOffset = OFFSET_DESKTOP;
 let pageCounter = 1;
 let lastWidthPag = window.innerWidth;
 
-function move(mode) {
-  switch (mode) {
-    case "fast-forward":
-      slideshowList.style.bottom = `${moveOffset * (maxPages - 1)}px`;
-      pageCounter = maxPages;
-      break;
-    case "forward":
-      slideshowList.style.bottom = `${moveOffset * pageCounter}px`;
-      pageCounter += 1;
-      break;
-    case "backward":
-      slideshowList.style.bottom = `${moveOffset * (pageCounter - 2)}px`;
-      pageCounter -= 1;
-      break;
-    case "fast-backward":
-      slideshowList.style.bottom = `0px`;
-      pageCounter = 1;
-      break;
-    case "to":
-      slideshowList.style.bottom = `${moveOffset * (pageCounter - 1)}px`;
-      break;
-  }
-}
-
-function refreshPagElem() {
+function updatePaginationButtons() {
   if (pageCounter === 1) {
-    pagButtons.forEach((button, index) => { button.disabled = index < 2; })
+    pagButtons.forEach((button, index) => { button.disabled = index < 2; });
   } else if (pageCounter === maxPages) {
-    pagButtons.forEach((button, index) => { button.disabled = index >= 2; })
+    pagButtons.forEach((button, index) => { button.disabled = index >= 2; });
   } else {
     pagButtons.forEach((button) => { button.disabled = false;});
   }
@@ -53,72 +28,85 @@ function refreshPagElem() {
   pageCounterElem.textContent = pageCounter;
 }
 
-function updateFlags(oldMaxPages, newMaxPages, newMoveOffset) {
+const moveParamCreators = {
+  'fast-forward': () => [`${moveOffset * (maxPages - 1)}px`, () => maxPages],
+  'forward': () => [`${moveOffset * pageCounter}px`, (i) => i + 1],
+  'backward': () => [`${moveOffset * (pageCounter - 2)}px`, (i) => i - 1],
+  'fast-backward': () => [`0px`, () => 1],
+  'to': () => [`${moveOffset * (pageCounter - 1)}px`, (i) => i],
+};
+
+const screenModeChangeParamCreators = {
+  'desktop-tablet': () => [MAX_PAGES_DESKTOP, MAX_PAGES_TABLET, OFFSET_TABLET],
+  'desktop-mobile': () => [MAX_PAGES_DESKTOP, MAX_PAGES_MOBILE, OFFSET_TABLET],
+  'tablet-desktop': () => [MAX_PAGES_TABLET, MAX_PAGES_DESKTOP, OFFSET_DESKTOP],
+  'tablet-mobile': () => [MAX_PAGES_TABLET, MAX_PAGES_MOBILE, OFFSET_TABLET],
+  'mobile-desktop': () => [MAX_PAGES_MOBILE, MAX_PAGES_DESKTOP, OFFSET_DESKTOP],
+  'mobile-tablet': () => [MAX_PAGES_MOBILE, MAX_PAGES_TABLET, OFFSET_TABLET],
+};
+
+const startScreenModeParamCreators = {
+  'desktop': () => [MAX_PAGES_DESKTOP, OFFSET_DESKTOP],
+  'tablet': () => [MAX_PAGES_TABLET, OFFSET_TABLET],
+  'mobile': () => [MAX_PAGES_MOBILE, OFFSET_TABLET],
+}
+
+function move(mode) {
+  const [ str, func ] = moveParamCreators[mode]();
+
+  slideshowList.style.bottom = str;
+  pageCounter = func(pageCounter);
+}
+
+function updateCardsPerPage(oldMaxPages, newMaxPages, newMoveOffset) {
   pageCounter = getProportion(pageCounter, oldMaxPages, newMaxPages);
   maxPages = newMaxPages;
   moveOffset = newMoveOffset;
+
+  move("to");
+  updatePaginationButtons();
+}
+
+function getScreenMode (width) {
+  if (width >= WIDTH_DESKTOP) {
+    return 'desktop';
+  } else if (width >= WIDTH_TABLET && width < WIDTH_DESKTOP) {
+    return 'tablet';
+  } else if (width < WIDTH_TABLET) {
+    return 'mobile';
+  }
 }
 
 window.addEventListener("load", () => {
   let w = window.innerWidth;
+  const mode = getScreenMode(w);
 
-  if (w >= WIDTH_DESKTOP) {
-    maxPages = MAX_PAGES_DESKTOP;
-    moveOffset = OFFSET_DESKTOP;
-  } else if (w >= WIDTH_TABLET && w < WIDTH_DESKTOP) {
-    maxPages = MAX_PAGES_TABLET;
-    moveOffset = OFFSET_TABLET;
-  } else {
-    maxPages = MAX_PAGES_MOBILE;
-    moveOffset = OFFSET_TABLET;
-  }
-
+  [maxPages, moveOffset] = startScreenModeParamCreators[mode]();
   lastWidthPag = w;
 });
 
 window.addEventListener("resize", async () => {
   let w = window.innerWidth;
+  const oldScreenMode = getScreenMode(lastWidthPag);
+  const newScreenMode = getScreenMode(w);
 
-  if (lastWidthPag >= WIDTH_DESKTOP) {
-    if (w >= WIDTH_TABLET && w < WIDTH_DESKTOP) {
-      updateFlags(MAX_PAGES_DESKTOP, MAX_PAGES_TABLET, OFFSET_TABLET);
-    } else if (w < WIDTH_TABLET) {
-      updateFlags(MAX_PAGES_DESKTOP, MAX_PAGES_MOBILE, OFFSET_TABLET);
-    }
+  if (oldScreenMode === newScreenMode) {
+    return;
   }
 
-  if (lastWidthPag >= WIDTH_TABLET && lastWidthPag < WIDTH_DESKTOP) {
-    if (w >= WIDTH_DESKTOP) {
-      updateFlags(MAX_PAGES_TABLET, MAX_PAGES_DESKTOP, OFFSET_DESKTOP);
-    } else if (w < WIDTH_TABLET) {
-      updateFlags(MAX_PAGES_TABLET, MAX_PAGES_MOBILE, OFFSET_TABLET);
-    }
-  }
-
-  if (lastWidthPag < WIDTH_TABLET) {
-    if (w >= WIDTH_DESKTOP) {
-      updateFlags(MAX_PAGES_MOBILE, MAX_PAGES_DESKTOP, OFFSET_DESKTOP);
-    } else if (w >= WIDTH_TABLET && w < WIDTH_DESKTOP) {
-      updateFlags(MAX_PAGES_MOBILE, MAX_PAGES_TABLET, OFFSET_TABLET);
-    }
-  }
-
-  await playAnimationOnce(slideshowList, 'fade 200ms ease forwards');
-  console.log('asdf');
-
-  move("to");
-
-  refreshPagElem();
+  await playAnimationOnce(slideshowList, 'dissolve 200ms');
+  updateCardsPerPage(...screenModeChangeParamCreators[`${oldScreenMode}-${newScreenMode}`]());
+  cleanStyle(slideshowList);
   lastWidthPag = w;
 });
 
 pagButtons.forEach((button) => {
   button.addEventListener("click", async () => {
-    await playAnimationOnce(slideshowList, 'fade 200ms ease forwards');
-    console.log('asdf');
+
+    await playAnimationOnce(slideshowList, 'dissolve 200ms');
+    cleanStyle(slideshowList);
 
     move(button.dataset.direction);
-
-    refreshPagElem();
+    updatePaginationButtons();
   });
 })
