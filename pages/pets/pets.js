@@ -86,6 +86,11 @@ window.addEventListener("load", () => {
 });
 
 window.addEventListener("resize", async () => {
+  if (isMoving) {
+    return;
+  }
+
+  isMoving = true;
   let w = window.innerWidth;
   const oldScreenMode = getScreenMode(lastWidthPag);
   const newScreenMode = getScreenMode(w);
@@ -98,15 +103,21 @@ window.addEventListener("resize", async () => {
   updateCardsPerPage(...screenModeChangeParamCreators[`${oldScreenMode}-${newScreenMode}`]());
   cleanStyle(slideshowList);
   lastWidthPag = w;
+  isMoving = false;
 });
 
 pagButtons.forEach((button) => {
   button.addEventListener("click", async () => {
+    if (isMoving) {
+      return;
+    }
+
+    isMoving = true;
 
     await playAnimationOnce(slideshowList, 'dissolve 200ms');
     cleanStyle(slideshowList);
-
     move(button.dataset.direction);
     updatePaginationButtons();
+    isMoving = false;
   });
 })
