@@ -1,15 +1,15 @@
 const WIDTH_DESKTOP = 1280;
 const WIDTH_TABLET = 768;
-const CARD_HEIGHT = document.querySelector(".card").getBoundingClientRect().height;
+const CARD_HEIGHT = document.querySelector('.card').getBoundingClientRect().height;
 const OFFSET_DESKTOP = (CARD_HEIGHT + 30) * 2;
 const OFFSET_TABLET = (CARD_HEIGHT + 30) * 3;
 const MAX_PAGES_DESKTOP = 6;
 const MAX_PAGES_TABLET = 8;
 const MAX_PAGES_MOBILE = 16;
 
-const pagElem = document.body.querySelector(".pagination");
-const pageCounterElem = pagElem.querySelector(".pagination__counter");
-const pagButtons = pagElem.querySelectorAll(".pagination__button");
+const pagElem = document.body.querySelector('.pagination');
+const pageCounterElem = pagElem.querySelector('.pagination__counter');
+const pagButtons = pagElem.querySelectorAll('.pagination__button');
 
 let maxPages = MAX_PAGES_DESKTOP;
 let moveOffset = OFFSET_DESKTOP;
@@ -18,11 +18,17 @@ let lastWidthPag = window.innerWidth;
 
 function updatePaginationButtons() {
   if (pageCounter === 1) {
-    pagButtons.forEach((button, index) => { button.disabled = index < 2; });
+    pagButtons.forEach((button, index) => {
+      button.disabled = index < 2;
+    });
   } else if (pageCounter === maxPages) {
-    pagButtons.forEach((button, index) => { button.disabled = index >= 2; });
+    pagButtons.forEach((button, index) => {
+      button.disabled = index >= 2;
+    });
   } else {
-    pagButtons.forEach((button) => { button.disabled = false;});
+    pagButtons.forEach((button) => {
+      button.disabled = false;
+    });
   }
 
   pageCounterElem.textContent = pageCounter;
@@ -30,10 +36,10 @@ function updatePaginationButtons() {
 
 const moveParamCreators = {
   'fast-forward': () => [`${moveOffset * (maxPages - 1)}px`, () => maxPages],
-  'forward': () => [`${moveOffset * pageCounter}px`, (i) => i + 1],
-  'backward': () => [`${moveOffset * (pageCounter - 2)}px`, (i) => i - 1],
+  forward: () => [`${moveOffset * pageCounter}px`, (i) => i + 1],
+  backward: () => [`${moveOffset * (pageCounter - 2)}px`, (i) => i - 1],
   'fast-backward': () => [`0px`, () => 1],
-  'to': () => [`${moveOffset * (pageCounter - 1)}px`, (i) => i],
+  to: () => [`${moveOffset * (pageCounter - 1)}px`, (i) => i],
 };
 
 const screenModeChangeParamCreators = {
@@ -46,13 +52,13 @@ const screenModeChangeParamCreators = {
 };
 
 const startScreenModeParamCreators = {
-  'desktop': () => [MAX_PAGES_DESKTOP, OFFSET_DESKTOP],
-  'tablet': () => [MAX_PAGES_TABLET, OFFSET_TABLET],
-  'mobile': () => [MAX_PAGES_MOBILE, OFFSET_TABLET],
-}
+  desktop: () => [MAX_PAGES_DESKTOP, OFFSET_DESKTOP],
+  tablet: () => [MAX_PAGES_TABLET, OFFSET_TABLET],
+  mobile: () => [MAX_PAGES_MOBILE, OFFSET_TABLET],
+};
 
 function move(mode) {
-  const [ str, func ] = moveParamCreators[mode]();
+  const [str, func] = moveParamCreators[mode]();
 
   slideshowList.style.bottom = str;
   pageCounter = func(pageCounter);
@@ -60,14 +66,17 @@ function move(mode) {
 
 function updateCardsPerPage(oldMaxPages, newMaxPages, newMoveOffset) {
   pageCounter = getProportion(pageCounter, oldMaxPages, newMaxPages);
+
+  console.log(pageCounter);
+
   maxPages = newMaxPages;
   moveOffset = newMoveOffset;
 
-  move("to");
+  move('to');
   updatePaginationButtons();
 }
 
-function getScreenMode (width) {
+function getScreenMode(width) {
   if (width >= WIDTH_DESKTOP) {
     return 'desktop';
   } else if (width >= WIDTH_TABLET && width < WIDTH_DESKTOP) {
@@ -77,7 +86,7 @@ function getScreenMode (width) {
   }
 }
 
-window.addEventListener("load", () => {
+window.addEventListener('load', () => {
   let w = window.innerWidth;
   const mode = getScreenMode(w);
 
@@ -85,12 +94,7 @@ window.addEventListener("load", () => {
   lastWidthPag = w;
 });
 
-window.addEventListener("resize", async () => {
-  if (isMoving) {
-    return;
-  }
-
-  isMoving = true;
+window.addEventListener('resize', () => {
   let w = window.innerWidth;
   const oldScreenMode = getScreenMode(lastWidthPag);
   const newScreenMode = getScreenMode(w);
@@ -99,25 +103,23 @@ window.addEventListener("resize", async () => {
     return;
   }
 
-  await playAnimationOnce(slideshowList, 'dissolve 200ms');
-  updateCardsPerPage(...screenModeChangeParamCreators[`${oldScreenMode}-${newScreenMode}`]());
+  const tag = `${oldScreenMode}-${newScreenMode}`;
+  updateCardsPerPage(...screenModeChangeParamCreators[tag]());
   cleanStyle(slideshowList);
   lastWidthPag = w;
-  isMoving = false;
 });
 
 pagButtons.forEach((button) => {
-  button.addEventListener("click", async () => {
+  button.addEventListener('click', async () => {
     if (isMoving) {
       return;
     }
 
     isMoving = true;
-
     await playAnimationOnce(slideshowList, 'dissolve 200ms');
     cleanStyle(slideshowList);
     move(button.dataset.direction);
     updatePaginationButtons();
     isMoving = false;
   });
-})
+});
