@@ -1,7 +1,8 @@
 # Shelter
 
-Demo link:
+This project is created with **npm** and **gulp**.
 
-A _slightly_-trimmed version of the task from RSSchool. 
-
-Who needs people when we can have pets?
+-   `npm intall` - install all dependencies
+-   `gulp makeWebp` - re-create Webp files
+-   `gulp dev` - run in dev mode
+-   `gulp build` - create build files

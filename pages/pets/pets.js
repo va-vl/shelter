@@ -66,6 +66,9 @@ function move(mode) {
 
 function updateCardsPerPage(oldMaxPages, newMaxPages, newMoveOffset) {
   pageCounter = getProportion(pageCounter, oldMaxPages, newMaxPages);
+
+  console.log(pageCounter);
+
   maxPages = newMaxPages;
   moveOffset = newMoveOffset;
 
@@ -91,12 +94,7 @@ window.addEventListener('load', () => {
   lastWidthPag = w;
 });
 
-window.addEventListener('resize', async () => {
-  if (isMoving) {
-    return;
-  }
-
-  isMoving = true;
+window.addEventListener('resize', () => {
   let w = window.innerWidth;
   const oldScreenMode = getScreenMode(lastWidthPag);
   const newScreenMode = getScreenMode(w);
@@ -105,11 +103,10 @@ window.addEventListener('resize', async () => {
     return;
   }
 
-  await playAnimationOnce(slideshowList, 'dissolve 200ms');
-  updateCardsPerPage(...screenModeChangeParamCreators[`${oldScreenMode}-${newScreenMode}`]());
+  const tag = `${oldScreenMode}-${newScreenMode}`;
+  updateCardsPerPage(...screenModeChangeParamCreators[tag]());
   cleanStyle(slideshowList);
   lastWidthPag = w;
-  isMoving = false;
 });
 
 pagButtons.forEach((button) => {
