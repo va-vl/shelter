@@ -1,6 +1,6 @@
 # Shelter
 
-Demo link: https://va-z.github.io/shelter/pages/main/main.html
+Demo link: https://va-vl.github.io/shelter/pages/main/main.html
 
 A __slightly__ updated version of the task from RSSchool. Features: 
 - Multi-page website;
